@@ -57,16 +57,6 @@ public class Main {
             errorCodes(1);
         }
 
-        List<String> searchPool = new ArrayList<>(); //Pool of words within max length
-
-        for (String word : dictionary){
-            if (word.length() <= longestWord.length()){
-                searchPool.add(word);
-            }
-        }
-
-
-
 
 
 
