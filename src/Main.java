@@ -7,6 +7,14 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void errorCodes(int id){
+        switch (id) {
+            case 0 -> System.out.println("Nie podales litery!");
+            case 1 -> System.out.println("Nie ma ani jednego slowa na podana litere w slowniku");
+        }
+        System.exit(0);
+    }
+
     private static boolean isLetter(char c) {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
@@ -17,18 +25,13 @@ public class Main {
         char letter = myScanner.next().charAt(0);
 
         if(!isLetter(letter)){
-            System.out.print("Nie podałes litery!");
-            System.exit(0);
+           errorCodes(0);
         }
         return letter;
     }
     public static String[] loadDictionary(String filename) throws IOException {
-        List<String> listOfStrings = new ArrayList<String>();
-
-        // load the data from file
+        List<String> listOfStrings;
         listOfStrings = Files.readAllLines(Paths.get(filename));
-
-        // convert arraylist to array
         return listOfStrings.toArray(new String[0]);
     }
 
@@ -36,13 +39,35 @@ public class Main {
         final long startTime = System.currentTimeMillis();
 
         String[] dictionary = loadDictionary("slownik.txt");
-        String inputLetter = Character.toString(getInput());
+        String inputLetter = Character.toString(getInput()); //Letter given by user
+
+        List<String> firstWord = new ArrayList<>(); //Pool of words starting with inputLetter
+        String longestWord = "";
 
         for (String word : dictionary) {
             if (word.startsWith(inputLetter)) {
-                System.out.println(word);
+                firstWord.add(word);
+                if (word.length() > longestWord.length()){
+                    longestWord = word;
+                }
             }
         }
+
+        if(firstWord.size() == 0){
+            errorCodes(1);
+        }
+
+        List<String> searchPool = new ArrayList<>(); //Pool of words within max length
+
+        for (String word : dictionary){
+            if (word.length() <= longestWord.length()){
+                searchPool.add(word);
+            }
+        }
+
+
+
+
 
 
         final long endTime = System.currentTimeMillis();
