@@ -42,6 +42,7 @@ public class Main {
         String inputLetter = Character.toString(getInput()); //Letter given by user
 
         List<String> firstWord = new ArrayList<>(); //Pool of words starting with inputLetter
+        List<String> secondWord = new ArrayList<>(); // Pool of reversed words
         String longestWord = "";
 
         for (String word : dictionary) {
@@ -51,12 +52,20 @@ public class Main {
                     longestWord = word;
                 }
             }
+            secondWord.add(new StringBuilder(word).reverse().toString()); //reverses word and adds it to list
         }
 
         if(firstWord.size() == 0){
             errorCodes(1);
         }
 
+        for (String first : firstWord){
+            for (String second : secondWord){
+                if ((first.length()+second.length())<=longestWord.length() && firstWord.contains(first+second)){
+                    System.out.println(first+second + " = " + first + " " + new StringBuilder(second).reverse());
+                }
+            }
+        }
 
 
 
