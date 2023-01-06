@@ -38,7 +38,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final long startTime = System.currentTimeMillis();
 
-        String[] dictionary = loadDictionary("slownik.txt");
+        String[] dictionary = loadDictionary("nowy_slownik.txt");
         String inputLetter = Character.toString(getInput()); //Letter given by user
 
         List<String> firstWord = new ArrayList<>(); //Pool of words starting with inputLetter
