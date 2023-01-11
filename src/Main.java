@@ -1,45 +1,14 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
-
-    public static void errorCodes(int id){
-        switch (id) {
-            case 0 -> System.out.println("Nie podales litery!");
-            case 1 -> System.out.println("Nie ma ani jednego slowa na podana litere w slowniku");
-        }
-        System.exit(0);
-    }
-
-    private static boolean isLetter(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-    }
-    public static char getInput(){
-        Scanner myScanner = new Scanner(System.in);
-        System.out.print("Podaj litere: ");
-
-        char letter = myScanner.next().charAt(0);
-
-        if(!isLetter(letter)){
-           errorCodes(0);
-        }
-        return letter;
-    }
-    public static String[] loadDictionary(String filename) throws IOException {
-        List<String> listOfStrings;
-        listOfStrings = Files.readAllLines(Paths.get(filename));
-        return listOfStrings.toArray(new String[0]);
-    }
 
     public static void main(String[] args) throws IOException {
         final long startTime = System.currentTimeMillis();
 
-        String[] dictionary = loadDictionary("nowy_slownik.txt");
-        String inputLetter = Character.toString(getInput()); //Letter given by user
+        String[] dictionary = FileHandler.loadDictionary("slownik.txt");
+        String inputLetter = Character.toString(InputHandler.getInput()); //Letter given by user
 
         List<String> firstWord = new ArrayList<>(); //Pool of words starting with inputLetter
         List<String> secondWord = new ArrayList<>(); // Pool of reversed words
@@ -56,7 +25,7 @@ public class Main {
         }
 
         if(firstWord.size() == 0){
-            errorCodes(1);
+            ErrorHandler.errorCodes(1);
         }
 
         for (String first : firstWord){
