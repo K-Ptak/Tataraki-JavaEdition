@@ -5,8 +5,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        final long startTime = System.currentTimeMillis();
-
         String[] dictionary = FileHandler.loadDictionary("slownik.txt");
         String inputLetter = Character.toString(InputHandler.getInput()); //Letter given by user
 
@@ -35,10 +33,5 @@ public class Main {
                 }
             }
         }
-
-
-
-        final long endTime = System.currentTimeMillis();
-        System.out.println("\nCzas trwania programu: " + (endTime - startTime) + "ms");
     }
 }
